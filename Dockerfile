@@ -65,8 +65,6 @@ ADD ./nginx-site.conf /etc/nginx/sites-available/default
 
 WORKDIR /app
 
-# Add phpinfo. Sometimes handy for development
-ADD ./phpinfo.php /app
 
 # Supervisor Config
 RUN /usr/bin/easy_install supervisor
@@ -77,12 +75,16 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+
 # This is sometimes useful
 RUN echo "export TERM=xterm" >> ~/.bash_aliases
 
 # Add our scripts folder and make sure they're executable
 ADD ./scripts /scripts
 RUN chmod -R 755 /scripts
+
+# Add some bits
+ADD ./bits /bits
 
 # private expose
 EXPOSE 80 443

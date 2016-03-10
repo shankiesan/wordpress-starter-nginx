@@ -1,6 +1,10 @@
 #!/bin/bash
 
 cd /app
+
+# Get all our little added bits
+cp -R /bits/* /app
+
 wp core download --allow-root \
     --skip-plugins=akismet,hello \
     --skip-themes=twentyfifteen,twentyfourteen

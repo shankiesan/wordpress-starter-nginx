@@ -6,7 +6,7 @@ services:
       - /app
       - /var/lib/mysql
   nginx:
-    image: climbrs-nginx
+    image: wordpress-nginx
     links:
       - mysql
     ports:

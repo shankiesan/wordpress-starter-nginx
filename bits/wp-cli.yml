@@ -1,0 +1,8 @@
+skip-plugins:
+ - hello
+ - askismet
+ skip-themes:
+  - twentysixteen
+  - twentyfifteen
+  - twentyfourteen
+  - twentytwelve
