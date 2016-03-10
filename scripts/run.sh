@@ -12,5 +12,6 @@ else
   echo "Database already setup!"
 fi
 
-source /etc/apache2/envvars
-exec apache2 -D FOREGROUND
+# start all the services
+service memcached start
+/usr/local/bin/supervisord -n

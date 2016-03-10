@@ -5,8 +5,8 @@ services:
     volumes:
       - /app
       - /var/lib/mysql
-  wordpress:
-    image: visiblevc/wordpress:latest
+  nginx:
+    image: climbrs-nginx
     links:
       - mysql
     ports:
@@ -15,8 +15,7 @@ services:
     volumes:
       - data:/app
       - ./data:/data
-      - ./wp-content/uploads:/app/wp-content/uploads
-      - ./wp-content/plugins:/app/wp-content/plugins
+      - ./wp-content:/app/wp-content
     environment:
       DB_NAME: wordpress
       DB_PASS: root

@@ -2,8 +2,8 @@
 
 sleep 10
 
-[ ! $DB_NAME ] && DB_NAME = 'wordpress'
-[ ! $DB_PASS ] && DB_PASS = 'root'
+[ ! $DB_NAME ] && DB_NAME='wordpress'
+[ ! $DB_PASS ] && DB_PASS='root'
 
 echo "=> Setup Database:"
 echo "====================================="

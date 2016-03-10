@@ -19,18 +19,4 @@ sed -i "s/'localhost'/\"mysql:3306\"/" /app/wp-config.php
 sed -i '/#@-/r /usr/local/src/wp.keys' /app/wp-config.php
 sed -i "/#@+/,/#@-/d" /app/wp-config.php
 
-# .htaccess
-cat > /app/.htaccess <<EOF
-# BEGIN WordPress
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-</IfModule>
-# END WordPress
-EOF
-
 echo "Wordpress setup!"
