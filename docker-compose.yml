@@ -6,7 +6,7 @@ services:
       - /app
       - /var/lib/mysql
   nginx:
-    image: wordpress-nginx
+    image: wordpress-starter-nginx
     links:
       - mysql
     ports:

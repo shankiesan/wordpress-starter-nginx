@@ -61,30 +61,33 @@ RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.co
 RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # nginx site conf
-ADD ./nginx-site.conf /etc/nginx/sites-available/default
+COPY ./nginx-site.conf /etc/nginx/sites-available/default
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 WORKDIR /app
 
-
 # Supervisor Config
 RUN /usr/bin/easy_install supervisor
-ADD ./supervisord.conf /etc/supervisord.conf
+COPY ./supervisord.conf /etc/supervisord.conf
 
 # Install WP-CLI
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+# Install Composer
 
 # This is sometimes useful
 RUN echo "export TERM=xterm" >> ~/.bash_aliases
 
-# Add our scripts folder and make sure they're executable
-ADD ./scripts /scripts
+# COPY our scripts folder and make sure they're executable
+COPY ./scripts /scripts
 RUN chmod -R 755 /scripts
 
-# Add some bits
-ADD ./bits /bits
+ENV cache-buster 10002
+# COPY some bits
+COPY ./bits /bits
 
 # private expose
 EXPOSE 80 443
